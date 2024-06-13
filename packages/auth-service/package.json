@@ -1,6 +1,6 @@
 {
   "name": "auth-service",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
   "description": "> TODO: description",
   "author": "lipeflorentino2 <lipeflorentino2@gmail.com>",
@@ -8,13 +8,10 @@
   "license": "ISC",
   "main": "server.js",
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "src": "src",
+    "tests": "tests"
   },
-  "files": [
-    "lib"
-  ],
   "scripts": {
-    "test": "node ./__tests__/auth-service.test.js"
+    "test": "node ./tests/authTests.test.js"
   }
 }
