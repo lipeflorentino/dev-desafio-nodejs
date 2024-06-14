@@ -13,5 +13,11 @@
   },
   "scripts": {
     "test": "node ./tests/authTests.test.js"
+  },
+  "devDependencies": {
+    "prisma": "^5.15.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.15.0"
   }
 }
