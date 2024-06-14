@@ -1,12 +1,12 @@
 {
   "name": "auth-service",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "> TODO: description",
   "author": "lipeflorentino2 <lipeflorentino2@gmail.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "server.js",
+  "main": "app.js",
   "directories": {
     "src": "src",
     "tests": "tests"
@@ -18,6 +18,10 @@
     "prisma": "^5.15.0"
   },
   "dependencies": {
-    "@prisma/client": "^5.15.0"
+    "@prisma/client": "^5.15.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
   }
 }
