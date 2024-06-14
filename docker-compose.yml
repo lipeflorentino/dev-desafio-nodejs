@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: postgresdb
+      POSTGRES_USER: userdb
+      POSTGRES_PASSWORD: postgres2024
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  auth-service:
+    build:
+      context: ./auth-service
+    ports:
+      - "3001:3001"
+    environment:
+      - DATABASE_URL=postgresql://userdb:postgres2024@postgres:5432/postgresdb
+      - JWT_SECRET=mysecret
+    depends_on:
+      - postgres
+
+  url-shortener-service:
+    build:
+      context: ./url-shortener-service
+    ports:
+      - "3002:3002"
+    environment:
+      - DATABASE_URL=postgresql://userdb:postgres2024@postgres:5432/postgresdb
+      - JWT_SECRET=mysecret
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
