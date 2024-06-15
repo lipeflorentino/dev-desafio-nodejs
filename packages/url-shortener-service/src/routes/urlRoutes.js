@@ -1,5 +1,5 @@
 const express = require('express');
-const { shortenUrl, listUrls, deleteUrl, updateUrl } = require('../controllers/urlController');
+const { shortenUrl, listUrls, deleteUrl, updateUrl, redirectUrl } = require('../controllers/urlController');
 const { authenticateToken } = require('../middlewares/authenticator');
 
 const router = express.Router();
@@ -12,5 +12,7 @@ router.post('/shorten', shortenUrl);
 router.get('/list', authenticateToken, listUrls);
 router.delete('/delete', authenticateToken, deleteUrl);
 router.patch('/update', authenticateToken, updateUrl);
+// Rota para redirecionamento e contagem de cliques
+router.get('/:shortUrl', redirectUrl);
 
 module.exports = router;
