@@ -3,8 +3,16 @@ const jwt = require('jsonwebtoken');
 const prisma = require('../config/dbConfig');
 require('dotenv').config();
 
+const { validationResult } = require('express-validator');
+
 // Função para registrar um novo usuário
 async function register(req, res) {
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  
   const { email, password } = req.body;
 
   try {
@@ -34,6 +42,12 @@ async function register(req, res) {
 
 // Função para autenticar um usuário
 async function login(req, res) {
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const { email, password } = req.body;
 
   console.log('Trying to log in...', { email });
@@ -57,6 +71,8 @@ async function login(req, res) {
     const token = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     });
+
+    console.log('Auth generated', { token: `Bearer ${token}` });
 
     res.status(200).json({ token: `Bearer ${token}` });
   } catch (error) {
