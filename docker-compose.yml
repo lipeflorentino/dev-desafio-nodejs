@@ -14,7 +14,7 @@ services:
 
   auth-service:
     build:
-      context: ./auth-service
+      context: ./packages/auth-service
     ports:
       - "3001:3001"
     environment:
@@ -25,7 +25,7 @@ services:
 
   url-shortener-service:
     build:
-      context: ./url-shortener-service
+      context: ./packages/url-shortener-service
     ports:
       - "3002:3002"
     environment:
