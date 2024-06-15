@@ -1,5 +1,5 @@
 # Usar a imagem base node:lts-alpine
-FROM node:lts-alpine
+FROM node:22-alpine
 
 # Definir o diretório de trabalho dentro do contêiner
 WORKDIR /app
