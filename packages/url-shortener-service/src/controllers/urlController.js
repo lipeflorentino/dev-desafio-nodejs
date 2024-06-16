@@ -1,15 +1,8 @@
 const shortid = require('shortid');
 const prisma = require('../../config/dbConfig');
 const jwt = require('jsonwebtoken');
-const { validationResult } = require('express-validator');
 
 async function shortenUrl(req, res) {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
     const { originalUrl } = req.body;
     const token = req.headers.authorization?.split(' ')[1];
     let userId = null;
@@ -22,11 +15,11 @@ async function shortenUrl(req, res) {
         // Verificar se o token JWT é válido e extrair o ID do usuário
         if (token) {
             try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            userId = decoded.userId;
+                const decoded = jwt.verify(token, process.env.JWT_SECRET);
+                userId = decoded.userId;
             } catch (error) {
-            console.log('Erro durante autenticação de usuário!', { error })
-            //return res.status(401).json({ error: 'Invalid token' });
+                console.log('Erro durante autenticação de usuário!', { error })
+                //return res.status(401).json({ error: 'Invalid token' });
             }
         }
 
@@ -100,12 +93,12 @@ async function updateUrl(req, res) {
 
     try {
         const url = await prisma.url.update({
-        where: { id: Number(id), userId: req.user.userId, deletedAt: null },
-        data: { originalUrl: newOriginalUrl, updatedAt: new Date() },
+            where: { id: Number(id), userId: req.user.userId, deletedAt: null },
+            data: { originalUrl: newOriginalUrl, updatedAt: new Date() },
         });
 
         if (url.count === 0) {
-        return res.status(404).json({ error: 'URL not found or you do not have permission to update it' });
+            return res.status(404).json({ error: 'URL not found or you do not have permission to update it' });
         }
 
         res.status(200).json({ message: 'URL updated successfully' });
