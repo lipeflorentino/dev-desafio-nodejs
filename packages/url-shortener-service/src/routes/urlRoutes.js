@@ -3,7 +3,6 @@ const { shortenUrl, listUrls, deleteUrl, updateUrl, redirectUrl } = require('../
 const { authenticateToken } = require('../middlewares/authenticator');
 
 const router = express.Router();
-const { body } = require('express-validator');
 
 // Rota para encurtar URL
 router.post('/shorten', shortenUrl);

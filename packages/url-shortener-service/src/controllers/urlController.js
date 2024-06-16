@@ -1,5 +1,5 @@
 const shortid = require('shortid');
-const prisma = require('../../../../database/prisma/config/dbConfig');
+const prisma = require('../../config/dbConfig');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
@@ -86,7 +86,7 @@ async function deleteUrl(req, res) {
             return res.status(404).json({ error: 'URL not found or already deleted' });
         }
   
-        res.status(200).json({ message: 'URL deleted successfully' });
+        res.status(204).json({ message: 'URL deleted successfully' });
     } catch (error) {
         console.log('error', { error });
         res.status(500).json({ error: 'Internal Server Error' });
