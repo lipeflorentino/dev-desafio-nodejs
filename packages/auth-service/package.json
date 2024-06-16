@@ -12,11 +12,14 @@
     "tests": "tests"
   },
   "scripts": {
-    "test": "node ./tests/authTests.test.js",
+    "test": "jest",
     "start": "node app.js"
   },
   "devDependencies": {
-    "prisma": "^5.15.0"
+    "jest": "^29.7.0",
+    "prisma": "^5.15.0",
+    "prismock": "^1.31.2",
+    "supertest": "^7.0.0"
   },
   "dependencies": {
     "@prisma/client": "^5.15.0",
