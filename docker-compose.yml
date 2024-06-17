@@ -22,7 +22,7 @@ services:
       DATABASE_URL: postgres://userdb:postgres2024@postgres:5432/postgresdb
     command: sh -c "npx prisma migrate deploy && npm start"
 
-  url-service:
+  url-shortener-service:
     build: ./packages/url-shortener-service
     ports:
       - "3002:3002"
@@ -31,6 +31,16 @@ services:
     environment:
       DATABASE_URL: postgres://userdb:postgres2024@postgres:5432/postgresdb
     command: sh -c "npx prisma migrate deploy && npm start"
+
+  # krakend:
+  #   image: devopsfaith/krakend
+  #   volumes:
+  #     - ./krakend.json:/etc/krakend/krakend.json
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - auth-service
+  #     - url-shortener-service
 
 volumes:
   postgres-data:

@@ -1,0 +1,32 @@
+{
+    "version": 3,
+    "name": "API Gateway",
+    "port": 8080,
+    "endpoints": [
+      {
+        "endpoint": "/auth/register",
+        "backend": [
+          {
+            "host": ["http://auth-service:3001"],
+            "url_pattern": "/"
+          }
+        ]
+      },
+      {
+        "endpoint": "/url/shorten",
+        "backend": [
+          {
+            "host": ["http://url-shortener-service:3002"],
+            "url_pattern": "/"
+          }
+        ]
+      }
+    ],
+    "extra_config": {
+      "telemetry/logging": {
+        "level": "DEBUG",
+        "prefix": "[KRAKEND]"
+      }
+    }
+  }
+  
