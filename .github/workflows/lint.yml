@@ -1,0 +1,48 @@
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: postgresdb
+          POSTGRES_USER: userdb
+          POSTGRES_PASSWORD: postgres2024
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "22.x"
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./packages/auth-service
+
+      - name: Run ESLint for auth-service
+        run: npm run lint
+        working-directory: ./packages/auth-service
+
+      - name: Install dependencies for url-shortener-service
+        run: npm install
+        working-directory: ./packages/url-shortener-service
+
+      - name: Run ESLint for url-shortener-service
+        run: npm run lint
+        working-directory: ./packages/url-shortener-service
