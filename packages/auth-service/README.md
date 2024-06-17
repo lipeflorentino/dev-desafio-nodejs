@@ -1,38 +1,48 @@
-# `auth-service`
+# Auth Service
 
-> TODO: description
+## Requisitos
 
-## Usage
+- Node.js
+- Docker (opcional, para uso de contêineres)
 
-```
-const authService = require('auth-service');
+## Configuração Local
 
-// TODO: DEMONSTRATE API
-```
+1. Instalar Dependências:
 
-## Comandos Prisma
-
-### Migrar o Banco de Dados
-
-Gere e aplique as migrações para criar as tabelas no banco de dados:
-
-```
-npx prisma migrate dev --name init
+```sh
+cd auth-service
+npm install
 ```
 
-### Gerar o Cliente Prisma
+2. Configurar Variáveis de Ambiente:
 
-Gere o cliente Prisma para interagir com o banco de dados:
+Crie um arquivo `.env` e adicione:
 
+```env
+DATABASE_URL=postgres://userdb:postgres2024@localhost:5432/postgresdb
 ```
-npx prisma generate
+
+3. Executar Migrações:
+
+```sh
+npx prisma migrate dev
 ```
 
-### Database
+4. Iniciar o Serviço:
 
-Schema | Name | Type | Owner
---------+--------------------+-------+----------
-public | Click | table | postgres
-public | Url | table | postgres
-public | User | table | postgres
-public | \_prisma_migrations | table | postgres
+```sh
+npm start
+```
+
+5. Acesse a Documentação da API:
+
+- Swagger UI: `http://localhost:3000/api-docs`
+
+## Docker
+
+1. Construir e Subir o Contêiner:
+
+```sh
+docker build -t auth-service .
+docker run -p 3001:3001 --env-file .env auth-service
+```
