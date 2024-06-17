@@ -35,7 +35,7 @@ paths:
         "400":
           description: Dados inválidos
 
-  /urls:
+  /url/list:
     get:
       summary: Listar URLs encurtadas pelo usuário
       tags:
@@ -63,7 +63,7 @@ paths:
         "401":
           description: Não autorizado
 
-  /urls/{id}:
+  /url/{id}:
     delete:
       summary: Deletar uma URL encurtada
       tags:

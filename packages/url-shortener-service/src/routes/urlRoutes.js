@@ -10,8 +10,8 @@ router.post('/shorten', [validateRequest], shortenUrl);
 
 // Rotas que requerem autenticação
 router.get('/list', [authenticateToken, validateRequest], listUrls);
-router.delete('/delete', [authenticateToken, validateRequest], deleteUrl);
-router.patch('/update', [authenticateToken, validateRequest], updateUrl);
+router.delete('/:id', [authenticateToken, validateRequest], deleteUrl);
+router.patch('/:id', [authenticateToken, validateRequest], updateUrl);
 // Rota para redirecionamento e contagem de cliques
 router.get('/:shortUrl', [validateRequest], redirectUrl);
 

@@ -72,8 +72,8 @@ async function listUrls(req, res) {
 
 // Deletar URL encurtada (deleção lógica)
 async function deleteUrl(req, res) {
-    console.log('Recebido com sucesso!', { user: req.user, query: req.query });
-    const { id } = req.query;
+    console.log('Recebido com sucesso!', { user: req.user, params: req.params });
+    const { id } = req.params;
 
     try {
         const url = await prisma.url.updateMany({
@@ -94,8 +94,8 @@ async function deleteUrl(req, res) {
 
 // Atualizar URL encurtada
 async function updateUrl(req, res) {
-    console.log('Recebido com sucesso!', { user: req.user, query: req.query, body: req.body });
-    const { id } = req.query;
+    console.log('Recebido com sucesso!', { user: req.user, query: req.query, body: req.body, params: req.params });
+    const { id } = req.params;
     const { newOriginalUrl } = req.body;
 
     try {
