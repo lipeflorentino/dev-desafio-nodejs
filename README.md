@@ -53,3 +53,7 @@ public | \_prisma_migrations | table | postgres
   para hospedar as aplicações Node.js e o AWS ECS com Fargate para orquestração dos containeres. Api Gateway para expor os serviços.
 - Ajustar o git workflow para funcionar corretamente (está apresentando problemas)
 - Melhorar fluxo de CI/CD
+- Implementar o husky (hooks)
+- Contruir o banco de dados de uma maneira melhor, criar um schema para cada serviço com as tabelas separadas.
+- Armazenar de forma diferente as informações sensíveis das variaveis de ambiente
+- 
