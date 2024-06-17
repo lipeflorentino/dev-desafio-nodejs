@@ -1,0 +1,145 @@
+openapi: 3.0.0
+info:
+  title: URL Shortener Service API
+  description: API para encurtar URLs
+  version: 1.0.0
+servers:
+  - url: http://localhost:3002
+paths:
+  /shorten:
+    post:
+      summary: Encurtar uma URL
+      tags:
+        - URL Shortener
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                originalUrl:
+                  type: string
+              required:
+                - originalUrl
+      responses:
+        "201":
+          description: URL encurtada com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  shortUrl:
+                    type: string
+        "400":
+          description: Dados inválidos
+
+  /urls:
+    get:
+      summary: Listar URLs encurtadas pelo usuário
+      tags:
+        - URL Shortener
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de URLs encurtadas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    originalUrl:
+                      type: string
+                    shortUrl:
+                      type: string
+                    clicks:
+                      type: integer
+        "401":
+          description: Não autorizado
+
+  /urls/{id}:
+    delete:
+      summary: Deletar uma URL encurtada
+      tags:
+        - URL Shortener
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: URL deletada com sucesso
+        "401":
+          description: Não autorizado
+        "404":
+          description: URL não encontrada
+
+    put:
+      summary: Atualizar a URL original de uma URL encurtada
+      tags:
+        - URL Shortener
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                originalUrl:
+                  type: string
+              required:
+                - originalUrl
+      responses:
+        "200":
+          description: URL atualizada com sucesso
+        "401":
+          description: Não autorizado
+        "404":
+          description: URL não encontrada
+
+  /{shortUrl}:
+    get:
+      summary: Redirecionar para o URL original
+      tags:
+        - URL Shortener
+      parameters:
+        - name: shortUrl
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "301":
+          description: Redirecionamento para o URL original
+          headers:
+            Location:
+              schema:
+                type: string
+                description: O URL original para o qual o usuário será redirecionado
+        "404":
+          description: URL não encontrada
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
