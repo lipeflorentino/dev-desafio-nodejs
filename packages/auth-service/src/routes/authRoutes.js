@@ -3,7 +3,7 @@ const { register, login } = require('../controllers/authController');
 
 const router = express.Router();
 const { body } = require('express-validator');
-console.log('teste');
+
 router.post('/register', 
     [
         body('email').isEmail().withMessage('Please enter a valid email'),

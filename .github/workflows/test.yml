@@ -35,6 +35,10 @@ jobs:
         run: npm install
         working-directory: ./packages/auth-service
 
+      - name: Run prisma migrations
+        run: npx prisma migrate deploy
+        working-directory: ./packages/auth-service
+
       - name: Run tests for auth-service
         run: npm run test
         working-directory: ./packages/auth-service
