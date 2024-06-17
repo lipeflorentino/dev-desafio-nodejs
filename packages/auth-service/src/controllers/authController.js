@@ -7,6 +7,7 @@ const { validationResult } = require('express-validator');
 
 // Função para registrar um novo usuário
 async function register(req, res) {
+  console.log('Registrando novo usuário');
   const errors = validationResult(req);
   
   if (!errors.isEmpty()) {
@@ -34,14 +35,16 @@ async function register(req, res) {
       },
     });
 
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: 'User registered successfully', user });
   } catch (error) {
+    console.log('error', { error });
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
 
 // Função para autenticar um usuário
 async function login(req, res) {
+  console.log('Recebido com sucesso!');
   const errors = validationResult(req);
   
   if (!errors.isEmpty()) {
@@ -50,7 +53,7 @@ async function login(req, res) {
 
   const { email, password } = req.body;
 
-  console.log('Trying to log in...', { email });
+  console.log('Tentando logar...', { email });
 
   try {
     // Verificar se o usuário existe
@@ -72,7 +75,7 @@ async function login(req, res) {
       expiresIn: '1h',
     });
 
-    console.log('Auth generated', { token: `Bearer ${token}` });
+    console.log('Auth gerado com sucesso', { token: `Bearer ${token}` });
 
     res.status(200).json({ token: `Bearer ${token}` });
   } catch (error) {
