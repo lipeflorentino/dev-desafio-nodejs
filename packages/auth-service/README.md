@@ -38,7 +38,7 @@ npm start
 
 5. Acesse a Documentação da API:
 
-- Swagger UI: `http://localhost:3000/api-docs`
+- Swagger UI: `http://localhost:3001/api-docs`
 
 ## Docker
 

@@ -1,28 +1,9 @@
-# Estrutura do Projeto
-
-```lua
-dev-desafio-nodejs/
-|-- auth-service/
-|   |-- Dockerfile
-|   |-- prisma/
-|   |-- src/
-|   |   |-- authController.js
-|   |   |-- swagger.js
-|   |-- openapi.yaml
-|-- url-shortener-service/
-|   |-- Dockerfile
-|   |-- prisma/
-|   |-- src/
-|   |   |-- urlController.js
-|   |   |-- swagger.js
-|   |-- openapi.yaml
-|-- docker-compose.yml
-```
+# Projeto
 
 ## Requisitos
 
 - Docker e Docker Compose instalados
-- Node.js (para desenvolvimento e execução fora do contêiner)
+- Node.js (para desenvolvimento e execução fora do contêiner) version: 22x
 
 ## Subindo os Serviços
 
@@ -31,8 +12,8 @@ Para iniciar todos os serviços (PostgreSQL, auth-service e url-shortener-servic
 1. Clone o Repositório:
 
 ```sh
-git clone https://github.com/seu-usuario/my-project.git
-cd my-project
+git clone https://github.com/seu-usuario/dev-desafio-nodejs.git
+cd dev-desafio-nodejs
 ```
 
 2. Iniciar os Serviços:
@@ -43,8 +24,8 @@ docker-compose up --build
 
 3. Acesse a Documentação da API:
 
-- auth-service: http://localhost:3000/api-docs
-- url-shortener-service: http://localhost:3001/api-docs
+- auth-service: http://localhost:3001/api-docs
+- url-shortener-service: http://localhost:3002/api-docs
 
 ## Acessar os Serviços
 
