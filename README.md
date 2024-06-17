@@ -1,7 +1,7 @@
 # Estrutura do Projeto
 
 ```lua
-my-project/
+dev-desafio-nodejs/
 |-- auth-service/
 |   |-- Dockerfile
 |   |-- prisma/
@@ -53,9 +53,11 @@ docker-compose up --build
 
 ## Database
 
+```lua
 Schema | Name | Type | Owner
 --------+--------------------+-------+----------
 public | Click | table | postgres
 public | Url | table | postgres
 public | User | table | postgres
 public | \_prisma_migrations | table | postgres
+```
