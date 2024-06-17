@@ -6,6 +6,7 @@ async function shortenUrl(req, res) {
     const { originalUrl } = req.body;
     const token = req.headers.authorization?.split(' ')[1];
     let userId = null;
+    console.log('Input recebido!', { originalUrl, hasToken: token });
 
     if (!originalUrl) {
         return res.status(400).json({ error: 'Original URL is required' });
@@ -17,14 +18,17 @@ async function shortenUrl(req, res) {
             try {
                 const decoded = jwt.verify(token, process.env.JWT_SECRET);
                 userId = decoded.userId;
+                console.log('Usuário verificado com sucesso!', { decoded });
             } catch (error) {
-                console.log('Erro durante autenticação de usuário!', { error })
+                console.log('Erro durante autenticação de usuário!', { error });
                 //return res.status(401).json({ error: 'Invalid token' });
             }
         }
 
         // Gerar um URL curto único
         const shortUrl = shortid.generate().slice(0, 6);
+
+        console.log('Url encurtada foi gerada!!', { shortUrl });
 
         // Armazenar o URL no banco de dados
         if (userId) {
@@ -47,6 +51,7 @@ async function shortenUrl(req, res) {
 
 // Listar URLs encurtadas pelo usuário
 async function listUrls(req, res) {
+    console.log('Recebido com sucesso!', { user: req.user });
     try {
         const urls = await prisma.url.findMany({
             where: { userId: req.user.userId, deletedAt: null },
@@ -67,6 +72,7 @@ async function listUrls(req, res) {
 
 // Deletar URL encurtada (deleção lógica)
 async function deleteUrl(req, res) {
+    console.log('Recebido com sucesso!', { user: req.user, query: req.query });
     const { id } = req.query;
 
     try {
@@ -88,6 +94,7 @@ async function deleteUrl(req, res) {
 
 // Atualizar URL encurtada
 async function updateUrl(req, res) {
+    console.log('Recebido com sucesso!', { user: req.user, query: req.query, body: req.body });
     const { id } = req.query;
     const { newOriginalUrl } = req.body;
 
@@ -110,6 +117,7 @@ async function updateUrl(req, res) {
 
 // Redirecionar para o URL original e contabilizar o acesso
 async function redirectUrl(req, res) {
+    console.log('Recebido com sucesso!', { user: req.user, params: req.params });
     const { shortUrl } = req.params;
 
     try {
@@ -127,6 +135,8 @@ async function redirectUrl(req, res) {
             where: { shortUrl },
             data: { clickCount: { increment: 1 } },
         });
+
+        console.log('Redirecionando...');
 
         // Redirecionar para o URL original
         res.redirect(url.originalUrl);
