@@ -1,38 +1,36 @@
-version: '3.8'
+version: '3.9'
 
 services:
   postgres:
     image: postgres:13
     environment:
-      POSTGRES_DB: postgresdb
       POSTGRES_USER: userdb
       POSTGRES_PASSWORD: postgres2024
+      POSTGRES_DB: postgresdb
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
 
   auth-service:
-    build:
-      context: ./packages/auth-service
+    build: ./packages/auth-service
     ports:
       - "3001:3001"
-    environment:
-      - DATABASE_URL=postgresql://userdb:postgres2024@postgres:5432/postgresdb
-      - JWT_SECRET=mysecret
     depends_on:
       - postgres
+    environment:
+      DATABASE_URL: postgres://userdb:postgres2024@postgres:5432/postgresdb
+    command: sh -c "npx prisma migrate deploy && npm start"
 
-  url-shortener-service:
-    build:
-      context: ./packages/url-shortener-service
+  url-service:
+    build: ./packages/url-shortener-service
     ports:
       - "3002:3002"
-    environment:
-      - DATABASE_URL=postgresql://userdb:postgres2024@postgres:5432/postgresdb
-      - JWT_SECRET=mysecret
     depends_on:
       - postgres
+    environment:
+      DATABASE_URL: postgres://userdb:postgres2024@postgres:5432/postgresdb
+    command: sh -c "npx prisma migrate deploy && npm start"
 
 volumes:
-  pgdata:
+  postgres-data:
