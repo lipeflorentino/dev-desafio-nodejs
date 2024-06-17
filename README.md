@@ -61,3 +61,14 @@ public | Url | table | postgres
 public | User | table | postgres
 public | \_prisma_migrations | table | postgres
 ```
+
+### Melhorias
+
+- Utilização de algum framework para desenvolvimento com node, por exemplo NestJS
+- Ao inves de acessar as funções de acesso ao banco diretamente pelo controller, seria interessante criar uma interface
+  de modo que seria mais simples trocar de ORM caso necessário
+- Implementar o gateway para centralizar o acesso aos serviços
+- Subir o projeto num cloudProvider, por exemplo AWS, uma forma de fazer seria usar o AWS RDS para base de dados postgresql, poderiamos usar o Elastic Beanstalk
+  para hospedar as aplicações Node.js e o AWS ECS com Fargate para orquestração dos containeres. Api Gateway para expor os serviços.
+- Ajustar o git workflow para funcionar corretamente (está apresentando problemas)
+- Melhorar fluxo de CI/CD

@@ -1,10 +1,10 @@
 # URL Shortener Service
 
-> TODO: description
+> Este serviço lida com encurtamento de URL e redirecionamento
 
 ## Requisitos
 
-- Node.js
+- Node.js version: 22.x
 - Docker (opcional, para uso de contêineres)
 
 ## Configuração Local

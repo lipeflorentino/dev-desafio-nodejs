@@ -9,6 +9,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
+  "engines": {
+    "node": ">=22.x"
+  },
   "author": "Filipe Lima",
   "license": "ISC",
   "description": "",

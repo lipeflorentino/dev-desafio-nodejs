@@ -1,8 +1,10 @@
 # Auth Service
 
+> Este serviço lida com autenticação
+
 ## Requisitos
 
-- Node.js
+- Node.js version: 22.x
 - Docker (opcional, para uso de contêineres)
 
 ## Configuração Local
